@@ -1,7 +1,7 @@
-<img src="variable_render_ui.jpg"/>
-
 # THE VARIABLE RENDER
 Render from context menu of property per setting value in input list.
+
+![variable_render_ui](./variable_render_ui.jpg "ui")
 
 # Usage
 1. Run Script.
