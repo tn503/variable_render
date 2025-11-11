@@ -1,3 +1,5 @@
+<img src="variable_render_ui.jpg"/>
+
 # THE VARIABLE RENDER
 Render from context menu of property per setting value in input list.
 
