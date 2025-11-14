@@ -197,6 +197,12 @@ def parse_values_string(self, context):
         ob = bpy.data.objects.get(i[1:].strip("'"))
         if ob: li.append(ob)
     
+    mat_names = re.findall(r"m'.*?'", s)
+    for i in mat_names:
+        s = s.replace(i, '')
+        ob = bpy.data.materials.get(i[1:].strip("'"))
+        if ob: li.append(ob)
+    
     strings = re.findall(r"'.*?'", s)
     for i in strings:
         i = i.strip("'")
@@ -243,6 +249,8 @@ def update_string(self, context):
             if type(i) in [tuple, list]:
                 array2.append([str(k) for k in i])
             elif type(i) is bpy.types.Object:
+                array2.append(repr(i).replace('bpy.data.', ''))
+            elif type(i) is bpy.types.Material:
                 array2.append(repr(i).replace('bpy.data.', ''))
             elif type(i) in [Decimal, int, str, float]:
                 array.append(i)
@@ -728,16 +736,21 @@ def the_variable_render_menu_draw_func(self, context):
     self.layout.operator(Variable_Render_Operator.bl_idname, text = Variable_Render_Operator.bl_label)
 
 
-def register():
-    classes = {'RENDER_OT_variable_render_operator',}
-    
-    for i in classes:
-        op_class = getattr(bpy.types, i, None)
-        if op_class:
-            bpy.utils.unregister_class(op_class)
-    
+class VR_PT_variable_render(bpy.types.Panel):
+    bl_label = "THE VARIABLE RENDER"
+    bl_idname = "VR_PT_variable_render"
+    bl_space_type = 'VIEW_3D'
+    bl_region_type = 'UI'
 
+    def draw(self, context):
+        self.layout.prop(context.scene, "camera")
+        if context.active_object and context.active_object.type == 'MESH':
+            if context.active_object.active_material:
+                self.layout.prop(context.active_object, 'active_material')
+
+def register():
     bpy.utils.register_class(Variable_Render_Operator)
+    bpy.utils.register_class(VR_PT_variable_render)
 
     for f in bpy.types.UI_MT_button_context_menu._dyn_ui_initialize():
         if f.__name__ == the_variable_render_menu_draw_func.__name__:
@@ -748,6 +761,7 @@ def register():
 
 def unregister():
     bpy.utils.unregister_class(Variable_Render_Operator)
+    bpy.utils.unregister_class(VR_PT_variable_render)
     
     bpy.types.UI_MT_button_context_menu.remove(the_variable_render_menu_draw_func)
 
