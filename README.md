@@ -3,7 +3,7 @@ Render from context menu of property per setting value in input list.
 
 ![variable_render_ui](./variable_render_ui.jpg "ui")
 
-# Usage
+## Usage
 1. Run Script.
 2. Select 'THE VARIABLE RENDER' from bottom of right click context menu on property.
 3. Input values in shown dialog panel. There are 3 way to setting values.
@@ -13,7 +13,7 @@ Render from context menu of property per setting value in input list.
 4. Press 'OK' button then rendering start. Rendering window close or 'ESC' in Rendering window then abort script.
 Image saved folder of .blend file(or Scene->Output Path).
 
-# Input values by text
+## Input values by text
 - space separate.
 - sharp start string to vector conversion with gamma correct. #0-9a-fA-F.
   1. #0 -> #000000FF
@@ -25,7 +25,12 @@ Image saved folder of .blend file(or Scene->Output Path).
 - (4 5 6)
 - [1 2 3]
 - 'TEXT'
-- o'object_name' -> try bpy.data.objects.get('object_name')
+- o'object_name'(single quotation) -> bpy.data.objects.get('object_name')
+- m'material_name'(single quotation) -> bpy.data.materials.get('material_name')
 
-# known problem
+## Panel
+Panel in 3DView -> Sidebar -> Misc.
+For change Camera and Active Material.
+
+## known problem
 1. prop_tabs_enum(self, "enum_tab") looks strange when invoke from sidebar(side panel).
