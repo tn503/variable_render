@@ -4,9 +4,9 @@ Render from context menu of property per setting value in input list.
 ![variable_render_ui](./variable_render_ui.jpg "ui")
 
 ## Usage
-1. Run Script.
+1. Copy Script. Paste Script to new text data-block in Blender internal text editor. Run Script.
 2. Select 'THE VARIABLE RENDER' from bottom of right click context menu on property.
-3. Input values in shown dialog panel. There are 3 way to setting values.
+3. Input values in shown dialog panel. There are 3 ways to setting values.
    * Fifteen Toggle buttons.
    * Text box. Write values SPACE separated. and I simple implemented '..' DoubleDot Operator for range expression. START .. STOP( .. STEP).
    * 'bpy.context.selected_objects' button. I think this button is only works for select camera objects and execute on Scene > Camera
